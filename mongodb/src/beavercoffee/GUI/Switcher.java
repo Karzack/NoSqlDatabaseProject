@@ -2,6 +2,8 @@ package beavercoffee.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class Switcher extends JPanel {
@@ -14,30 +16,23 @@ public class Switcher extends JPanel {
 
     private void init(){
 
-        Orders employerdMenu = new Orders(500, 400);
-        panelMap.put("EmpoyerMenu", employerdMenu);
-        this.add(employerdMenu, "EmployerMenu");
+        AddCustomer addCustomer = new AddCustomer(300, 400);
+        panelMap.put("AddCustomer", addCustomer);
+        this.add(addCustomer, "AddCustomer");
 
-        EmployerPanel employerMenu = new EmployerPanel(500, 400);
-        panelMap.put("EmpoyerMenu", employerMenu);
-        this.add(employerMenu, "EmployerMenu");
+        Orders ordrs = new Orders(500, 400);
+        panelMap.put("Orders", ordrs);
+        this.add(ordrs, "Orders");
+
+        EmployerPanel employerPanel = new EmployerPanel(500, 400);
+        panelMap.put("EmpoyerPanel", employerPanel);
+        this.add(employerPanel, "EmployerPanel");
 
         EmployeePanel employeePanel = new EmployeePanel(500, 400);
         panelMap.put("EmployeePanel", employeePanel);
         this.add(employeePanel, "EmployeeMenu");
 
-        ManagerDataAccessPanel managerData = new ManagerDataAccessPanel(500, 400);
-        panelMap.put("ManagerData", managerData);
-        this.add(managerData, "ManagerData");
 
-       ManagerPanel managerMenu = new ManagerPanel(500, 400);
-        panelMap.put("ManagerMenu", managerMenu);
-        this.add(managerMenu, "ManagerMenu");
-
-
-        AddCustomer createCustomer = new AddCustomer(300, 400);
-        panelMap.put("CreateCustomer", createCustomer);
-        this.add(createCustomer, "CreateCustomer");
 
     }
 
@@ -52,12 +47,24 @@ public class Switcher extends JPanel {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
 
-        Switcher switcher = new Switcher();
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                 Switcher switcher = new Switcher();
 
-        frame.add(switcher);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    }
+                 frame.add(switcher);
+                  frame.pack();
+                  frame.setVisible(true);
+
+            }
+        });
+
+
+
+}
+}
+
+
+

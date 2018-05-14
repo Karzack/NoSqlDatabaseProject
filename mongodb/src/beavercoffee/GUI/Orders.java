@@ -13,7 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class Orders extends JPanel implements ActionListener {
+public class Orders extends JPanel  {
     private int width, height;
     private JList<String> productList = new JList<String>();
     private JList<String> orderList = new JList<String>();
@@ -65,7 +65,7 @@ public class Orders extends JPanel implements ActionListener {
         panel.add(orderPane);
 
         add(btnEnter);
-        btnEnter.addActionListener(this);
+
 
 
     }
@@ -75,10 +75,7 @@ public class Orders extends JPanel implements ActionListener {
         return btnEnter;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      isClicked = "isClicked";
-    }
+
 
     public String getText(){
         return isClicked;
