@@ -3,12 +3,10 @@ package beavercoffee.GUI;
 
 
 
-import java.awt.Dimension;
+import java.awt.*;
+import java.util.HashMap;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class AddCustomer extends JPanel{
     private int width, height;
@@ -17,6 +15,7 @@ public class AddCustomer extends JPanel{
     private JTextField tfID = new JTextField();
     private JTextField tfAddress = new JTextField();
     private JTextField tfOccupation = new JTextField();
+
 
     private JButton btnEnter = new JButton("Add customer");
 
@@ -63,4 +62,5 @@ public class AddCustomer extends JPanel{
     public Dimension getPreferredSize(){
         return new Dimension(width, height);
     }
+
 }
