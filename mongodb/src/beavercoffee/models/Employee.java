@@ -9,14 +9,14 @@ public class Employee {
     private ObjectId id;
     private String name;
     private String SSN;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private int workingPercentage;
     private String role;
 
     public Employee() {}
 
-    public Employee(String name, String SSN, Date startDate, Date endDate, int workingPercentage, String role) {
+    public Employee(String name, String SSN, String startDate, String endDate, int workingPercentage, String role) {
         this.name = name;
         this.SSN = SSN;
         this.startDate = startDate;
@@ -41,19 +41,19 @@ public class Employee {
         this.SSN = SSN;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
