@@ -1,11 +1,9 @@
 package beavercoffee;
 
+import beavercoffee.GUI.AddCustomer;
 import beavercoffee.models.Employee;
 import beavercoffee.models.Location;
-import com.mongodb.Block;
 import com.mongodb.client.MongoCollection;
-
-import java.util.Date;
 
 public class Main {
 
@@ -30,7 +28,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main app = new Main();
+
+        AddCustomer gui = new AddCustomer(400,5000);
+
+/*       Main app = new Main();
 
         app.insertEmployee(
                 new Employee(
@@ -51,6 +52,7 @@ public class Main {
         );
 
         app.printEmployees();
-        app.printLocations();
+        app.printLocations();*/
     }
+
 }
