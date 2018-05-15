@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Employee {
     private ObjectId id;
+    private String name;
     private String SSN;
     private Date startDate;
     private Date endDate;
@@ -14,12 +15,22 @@ public class Employee {
     private String role;
 
     public Employee() {}
-    public Employee(String SSN, Date startDate, Date endDate, int workingPercentage, String role) {
+
+    public Employee(String name, String SSN, Date startDate, Date endDate, int workingPercentage, String role) {
+        this.name = name;
         this.SSN = SSN;
         this.startDate = startDate;
         this.endDate = endDate;
         this.workingPercentage = workingPercentage;
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSSN() {
@@ -74,6 +85,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", SSN='" + SSN + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +

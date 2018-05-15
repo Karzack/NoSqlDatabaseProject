@@ -11,5 +11,6 @@
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" name="bson-3.4.2" level="project" />
     <orderEntry type="library" name="bson-3.5.0" level="project" />
+    <orderEntry type="library" name="org.mongodb:mongo-java-driver:3.6.3" level="project" />
   </component>
 </module>
