@@ -1,11 +1,9 @@
-package beavercoffee.GUI;
+package GUI;
 
-import beavercoffee.Controller;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class MainPanel extends JPanel {
     private JPanel menuPanel = new JPanel();

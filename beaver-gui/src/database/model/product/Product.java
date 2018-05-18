@@ -1,4 +1,4 @@
-package beavercoffee.models.product;
+package database.model.product;
 
 import org.bson.types.ObjectId;
 
@@ -62,12 +62,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name=" + name +
-                ", price=" + price +
-                ", mandatoryIngredients=" + mandatoryIngredients +
-                ", alternatives=" + alternatives +
-                '}';
+        return name.getEnglish();
     }
 }

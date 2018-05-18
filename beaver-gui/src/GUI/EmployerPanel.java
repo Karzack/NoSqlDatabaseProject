@@ -1,9 +1,6 @@
-package beavercoffee.GUI;
+package GUI;
 
-import beavercoffee.Controller;
-
-import javax.swing.JButton;
-
+import javax.swing.*;
 
 public class EmployerPanel extends MainPanel{
 

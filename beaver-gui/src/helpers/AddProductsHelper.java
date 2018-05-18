@@ -1,9 +1,9 @@
-package beavercoffee.helpers;
+package helpers;
 
-import beavercoffee.DBInstance;
-import beavercoffee.models.Unit;
-import beavercoffee.models.product.*;
 import com.mongodb.client.MongoCollection;
+import database.DBInstance;
+import database.model.Unit;
+import database.model.product.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +12,7 @@ import java.util.List;
 public class AddProductsHelper {
 
     public static void addProducts() {
-        MongoCollection<Product> collection = DBInstance.getInstance().getCollection("products", Product.class);
+        MongoCollection<Product> collection = DBInstance.connectDB().getCollection("products", Product.class);
 
         collection.drop(); //TODO Inte bra lösning, fixa.
 
@@ -20,7 +20,7 @@ public class AddProductsHelper {
                 new Product(
                         new ProductName("Hela bönor", "Whole Bean Coffee"),
                         new ProductPrice(50, 4.5),
-                        Collections.emptyList(),
+                        Collections.<IngredientItem>emptyList(),
                         Arrays.asList(
                                 new IngredientItem(new Ingredient("Espresso Roast", Unit.GRAM), 500),
                                 new IngredientItem(new Ingredient("Whole Bean French Roast", Unit.GRAM), 500),
@@ -33,7 +33,7 @@ public class AddProductsHelper {
                         Arrays.asList(
                                 new IngredientItem(new Ingredient("Whole Bean French Roast", Unit.GRAM), 50)
                         ),
-                        Collections.emptyList()
+                        Collections.<IngredientItem>emptyList()
                 ),
                 new Product(
                         new ProductName("Espresso", "Espresso"),
@@ -41,7 +41,7 @@ public class AddProductsHelper {
                         Arrays.asList(
                                 new IngredientItem(new Ingredient("Espresso Roast", Unit.GRAM), 50)
                         ),
-                        Collections.emptyList()
+                        Collections.<IngredientItem>emptyList()
                 ),
                 new Product(
                         new ProductName("Latte", "Latte"),
@@ -82,11 +82,13 @@ public class AddProductsHelper {
                 )
         );
 
+
         collection.insertMany(products);
+
     }
 
     public static void testListProducts() {
-        MongoCollection<Product> collection = DBInstance.getInstance().getCollection("products", Product.class);
+        MongoCollection<Product> collection = DBInstance.connectDB().getCollection("products", Product.class);
         for (Product product : collection.find()) {
             System.out.println(product.getName().getEnglish() + "\nContains:");
             for (IngredientItem item : product.getMandatoryIngredients()) {
@@ -107,6 +109,7 @@ public class AddProductsHelper {
 
             System.out.println();
         }
+
     }
 
 

@@ -1,6 +1,5 @@
-package beavercoffee.models.clubmember;
+package database.model;
 
-import beavercoffee.models.Order;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -28,6 +27,10 @@ public class ClubMember {
         this.hasBenefits = hasBenefits;
         this.listOfOrders = listOfOrders;
         this.cardNumber = cardNumber;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public ObjectId getId() {
@@ -74,7 +77,7 @@ public class ClubMember {
         this.occupation = occupation;
     }
 
-    public boolean isHasBenefits() {
+    public boolean hasBenefits() {
         return hasBenefits;
     }
 

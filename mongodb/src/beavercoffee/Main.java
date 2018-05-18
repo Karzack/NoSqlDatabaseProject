@@ -1,6 +1,7 @@
 package beavercoffee;
 
 import beavercoffee.GUI.AddCustomer;
+import beavercoffee.helpers.AddProductsHelper;
 import beavercoffee.models.Employee;
 import beavercoffee.models.Location;
 import com.mongodb.client.MongoCollection;
@@ -29,8 +30,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        AddCustomer gui = new AddCustomer(400,5000);
+//        AddCustomer gui = new AddCustomer(400,5000);
 
+        AddProductsHelper.addProducts();
+        AddProductsHelper.testListProducts();
 /*       Main app = new Main();
 
         app.insertEmployee(

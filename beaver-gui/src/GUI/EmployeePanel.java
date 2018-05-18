@@ -1,13 +1,7 @@
-package beavercoffee.GUI;
+package GUI;
 
-import beavercoffee.Controller;
-
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 
 public class EmployeePanel extends MainPanel {
     private JButton btnAddCustomer = new JButton("Add customer");

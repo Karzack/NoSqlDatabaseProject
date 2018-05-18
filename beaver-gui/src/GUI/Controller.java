@@ -1,9 +1,10 @@
-package beavercoffee;
+package GUI;
 
-import beavercoffee.GUI.MainPanel;
-import beavercoffee.models.Employee;
-import beavercoffee.models.clubmember.ClubMember;
+
 import com.mongodb.client.MongoCollection;
+import database.DBInstance;
+import database.model.ClubMember;
+import database.model.Employee;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +14,17 @@ import java.util.UUID;
 public class Controller {
 
     public void onAddEmployee(String name, String ssn, String startDate, String endDate, String workingPercentage, String role) {
-        MongoCollection<Employee> collection = DBInstance.getInstance().getCollection("employees", Employee.class);
-        Employee employee = new Employee(
-                name,
-                ssn,
-                startDate,
-                endDate,
-                Integer.parseInt(workingPercentage),
-                role
-        );
-
-        collection.insertOne(employee);
+//        MongoCollection<Employee> collection = DBInstance.getInstance().getCollection("employees", Employee.class);
+//        Employee employee = new Employee(
+//                name,
+//                ssn,
+//                startDate,
+//                endDate,
+//                Integer.parseInt(workingPercentage),
+//                role
+//        );
+//
+//        collection.insertOne(employee);
     }
 
     public void onAddMember(String name, String ssn, String address, String occupation, boolean hasBenefit) {

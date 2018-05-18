@@ -3,13 +3,13 @@ package beavercoffee.models.product;
 import beavercoffee.models.Unit;
 import org.bson.types.ObjectId;
 
-public class Ingridient {
+public class Ingredient {
     private ObjectId id;
     private String name;
     private Unit unit;
 
-    public Ingridient() {}
-    public Ingridient(String name, Unit unit) {
+    public Ingredient() {}
+    public Ingredient(String name, Unit unit) {
         this.name = name;
         this.unit = unit;
     }
@@ -40,7 +40,7 @@ public class Ingridient {
 
     @Override
     public String toString() {
-        return "Ingridient{" +
+        return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", unit='" + unit + '\'' +

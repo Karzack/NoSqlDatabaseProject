@@ -1,6 +1,6 @@
-package beavercoffee.models;
+package database.model;
 
-import beavercoffee.models.product.Ingredient;
+import database.model.product.Ingredient;
 import org.bson.types.ObjectId;
 
 public class Stock {

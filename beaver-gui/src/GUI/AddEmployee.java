@@ -1,12 +1,7 @@
-package beavercoffee.GUI;
-
-import beavercoffee.Controller;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddEmployee extends JPanel{
     private Controller controller;
