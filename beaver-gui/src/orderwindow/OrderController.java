@@ -153,6 +153,18 @@ public class OrderController {
 
     }
 
+    public void handleOnClickAddCustomer() {
+
+    }
+
+    public void handleOnClickAdmin() {
+
+    }
+
+    public void handleOnClickLogout() {
+
+    }
+
     /**
      * Fetches a member with the supplied SSN
      */
@@ -161,9 +173,10 @@ public class OrderController {
         ClubMember member = ClubMemberDAO.getMember(membersField.getCharacters().toString());
         if (member != null) {
             this.member = member;
+            createAlertDialog("Success", "Found member " + member.getName());
         } else {
             this.member = null;
-            System.out.println("Did not find the member");
+            createAlertDialog("Error", "Member was not found");
         }
     }
 
@@ -171,7 +184,7 @@ public class OrderController {
      * Adds a product to orderItems and to stockItems.
      * Also updates the gui.
      */
-    public void handleOnAdd() {
+    public void handleOnClickAdd() {
         if (selectedProduct != null) {
 
             listViewItems.add(
@@ -187,19 +200,11 @@ public class OrderController {
         }
     }
 
-    public void handleOnAddCustomer() {
-
-    }
-
-    public void handleOnCancel() {
-
-    }
-
     /**
      * Removes an item from orderItems and stockItems.
      * Also updates the gui.
      */
-    public void handleRemoveItem() {
+    public void handleOnClickRemoveItem() {
         int selectedIndex = this.orderListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             updatePrice(PriceOperation.SUBTRACT, orderItems.get(selectedIndex).getPrice());
@@ -208,6 +213,14 @@ public class OrderController {
             orderItems.remove(selectedIndex);
             stockItems.remove(selectedIndex);
         }
+    }
+
+    public void handleOnClickCancel() {
+
+    }
+
+    public void handleOnClickConfirm(ActionEvent actionEvent) {
+
     }
 
     /**
@@ -265,5 +278,13 @@ public class OrderController {
             if (member.hasBenefits())
                 return price - 0.10 * price;
         return price;
+    }
+
+    private void createAlertDialog(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(content);
+
+        alert.showAndWait();
     }
 }

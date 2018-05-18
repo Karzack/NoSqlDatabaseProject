@@ -28,11 +28,11 @@
         <padding>
             <Insets bottom="40"/>
         </padding>
-        <Button fx:id="addCustomerButton" onAction="#handleOnAddCustomer" text="Add Customer"/>
-        <Button fx:id="AdminButton" onAction="#handleOnAddCustomer" text="Admin"/>
+        <Button fx:id="addCustomerButton" onAction="#handleOnClickAddCustomer" text="Add Customer"/>
+        <Button fx:id="AdminButton" onAction="#handleOnClickAdmin" text="Admin"/>
 
         <HBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
-            <Button fx:id="logoutButton" alignment="TOP_RIGHT" onAction="#handleOnAddCustomer" text="Logout"/>
+            <Button fx:id="logoutButton" alignment="TOP_RIGHT" onAction="#handleOnClickLogout" text="Logout"/>
         </HBox>
     </HBox>
 
@@ -54,7 +54,7 @@
     <CheckBox fx:id="creamAddonCheckbox" layoutX="15.0" layoutY="33.0" prefWidth="190.0" text="Irish Cream"
               GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
-    <Button fx:id="addButton" onAction="#handleOnAdd" prefHeight="30" prefWidth="60" text="Add" GridPane.columnIndex="0"
+    <Button fx:id="addButton" onAction="#handleOnClickAdd" prefHeight="30" prefWidth="60" text="Add" GridPane.columnIndex="0"
             GridPane.halignment="LEFT" GridPane.rowIndex="7"/>
 
     <ListView fx:id="orderListView" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1"
@@ -63,14 +63,14 @@
     <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="9" spacing="2">
         <Label fx:id="totalPriceLabel" text="Total price: "/>
         <HBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
-            <Button fx:id="removeItem" onAction="#handleRemoveItem" text="-"/>
+            <Button fx:id="removeItem" onAction="#handleOnClickRemoveItem" text="-"/>
         </HBox>
     </HBox>
 
     <HBox alignment="BOTTOM_RIGHT" spacing="2" GridPane.columnIndex="1" GridPane.rowIndex="10">
-        <Button fx:id="cancelButton" onAction="#handleOnCancel" text="Cancel" GridPane.columnIndex="1"
+        <Button fx:id="cancelButton" onAction="#handleOnClickCancel" text="Cancel" GridPane.columnIndex="1"
                 GridPane.rowIndex="10"/>
-        <Button fx:id="confirmButton" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+        <Button fx:id="confirmButton" onAction="#handleOnClickConfirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
     </HBox>
 
 </GridPane>
