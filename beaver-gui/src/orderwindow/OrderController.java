@@ -1,8 +1,10 @@
 package orderwindow;
 
-import database.ClubMemberDAO;
-import database.ProductDAO;
+import database.dao.ClubMemberDAO;
+import database.dao.OrderDAO;
+import database.dao.ProductDAO;
 import database.model.ClubMember;
+import database.model.Order;
 import database.model.Unit;
 import database.model.product.Ingredient;
 import database.model.product.IngredientItem;
@@ -16,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -169,7 +172,7 @@ public class OrderController {
      * Fetches a member with the supplied SSN
      */
     public void handleMemberTextField(ActionEvent actionEvent) {
-        TextField membersField = (TextField)actionEvent.getSource();
+        TextField membersField = (TextField) actionEvent.getSource();
         ClubMember member = ClubMemberDAO.getMember(membersField.getCharacters().toString());
         if (member != null) {
             this.member = member;
@@ -189,8 +192,8 @@ public class OrderController {
 
             listViewItems.add(
                     location == LOCATION_SWEDEN ?
-                    selectedProduct.getName().getSwedish() :
-                    selectedProduct.getName().getEnglish()
+                            selectedProduct.getName().getSwedish() :
+                            selectedProduct.getName().getEnglish()
             );
 
             stockItems.add(getSelectedIngredients());
@@ -216,11 +219,22 @@ public class OrderController {
     }
 
     public void handleOnClickCancel() {
+        List<Order> orders = OrderDAO.getOrders();
 
+        for (Order order : orders) System.out.println(order);
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
+        Order order = new Order(
+                null,
+                member != null ? member.getId() : null,
+                null,
+                new Date(),
+                totalPrice,
+                orderItems
+        );
 
+        OrderDAO.insertOrder(order);
     }
 
     /**
@@ -238,8 +252,9 @@ public class OrderController {
 
     /**
      * Updates the price depending on localization and member benefits.
+     *
      * @param operation Addition or subtraction.
-     * @param price The base price for the product.
+     * @param price     The base price for the product.
      */
     private void updatePrice(PriceOperation operation, ProductPrice price) {
         switch (operation) {
