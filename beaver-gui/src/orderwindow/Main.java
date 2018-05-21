@@ -17,6 +17,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public void open() {
+        launch();
+    }
 
     public static void main(String[] args) {
 //        AddProductsHelper.addProducts();

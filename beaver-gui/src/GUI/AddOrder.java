@@ -1,8 +1,12 @@
 package GUI;
 
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AddOrder extends JPanel{
     private int width, height;

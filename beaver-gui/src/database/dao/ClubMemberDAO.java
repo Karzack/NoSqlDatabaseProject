@@ -12,4 +12,9 @@ public class ClubMemberDAO {
         MongoCollection<ClubMember> collection = DBInstance.connectDB().getCollection(MEMBERS_COLLECTION, ClubMember.class);
         return collection.find(Filters.eq("sSN", ssn)).first();
     }
+
+    public static void addMember(ClubMember member) {
+        MongoCollection<ClubMember> collection = DBInstance.connectDB().getCollection(MEMBERS_COLLECTION, ClubMember.class);
+        collection.insertOne(member);
+    }
 }

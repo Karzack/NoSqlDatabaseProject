@@ -1,5 +1,6 @@
 package orderwindow;
 
+import GUI.AddCustomer;
 import database.dao.ClubMemberDAO;
 import database.dao.OrderDAO;
 import database.dao.ProductDAO;
@@ -15,8 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,10 +51,13 @@ public class OrderController {
     @FXML
     private Label totalPriceLabel;
 
+    private JFrame frame;
+
+
     private final int LOCATION_SWEDEN = 1;
     private final int LOCATION_USA = 2;
 
-    private int location = LOCATION_SWEDEN;
+    private int location = LOCATION_USA;
 
     public enum PriceOperation {
         ADD,
@@ -70,17 +78,22 @@ public class OrderController {
     private IngredientItem irishCreamAddon;
 
     private double totalPrice = 0;
-
+    private String test;
     /**
      * Called when the window is showing
      */
     @FXML
     private void initialize() {
+        frame = new JFrame();
+        System.out.println(test);
         initGUIData();
         initGUIPresentation();
         initListeners();
     }
 
+    public void setEmployee(String test) {
+        this.test = test;
+    }
     /**
      * Get products and sets the data to gui
      */
@@ -157,7 +170,12 @@ public class OrderController {
     }
 
     public void handleOnClickAddCustomer() {
-
+        EventQueue.invokeLater(()->{
+            frame.add(new AddCustomer(500,400));
+            frame.pack();
+            frame.setVisible(true);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        });
     }
 
     public void handleOnClickAdmin() {
@@ -290,7 +308,7 @@ public class OrderController {
      */
     private double calculatePrice(double price) {
         if (member != null)
-            if (member.hasBenefits())
+            if (member.getHasBenefits())
                 return price - 0.10 * price;
         return price;
     }
