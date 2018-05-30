@@ -1,5 +1,8 @@
 package database.model.product;
 
+/**
+ * @author Ola Dahl
+ */
 public class IngredientItem {
     private Ingredient ingredient;
     private double quantity;

@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
+/**
+ * @author Ola Dahl
+ */
 public class ProductDAO {
     private static String PRODUCTS_COLLECTION = "products";
 

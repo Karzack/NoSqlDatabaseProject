@@ -3,6 +3,9 @@ package database.model;
 import database.model.product.Ingredient;
 import org.bson.types.ObjectId;
 
+/**
+ * @author Ola Dahl
+ */
 public class Stock {
     private ObjectId locationId;
     private Unit unitMeasurement;

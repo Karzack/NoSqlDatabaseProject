@@ -1,12 +1,9 @@
 package orderwindow;
 
-import GUI.AddCustomer;
 import database.dao.ClubMemberDAO;
 import database.dao.OrderDAO;
 import database.dao.ProductDAO;
-import database.model.ClubMember;
-import database.model.Order;
-import database.model.Unit;
+import database.model.*;
 import database.model.product.Ingredient;
 import database.model.product.IngredientItem;
 import database.model.product.Product;
@@ -21,12 +18,13 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * @author Ola Dahl
+ */
 public class OrderController {
 
 
@@ -56,8 +54,7 @@ public class OrderController {
 
     private final int LOCATION_SWEDEN = 1;
     private final int LOCATION_USA = 2;
-
-    private int location = LOCATION_USA;
+    private final int CURRENT_LOCATION;
 
     public enum PriceOperation {
         ADD,
@@ -78,22 +75,25 @@ public class OrderController {
     private IngredientItem irishCreamAddon;
 
     private double totalPrice = 0;
-    private String test;
+    private final Employee employee;
+    private final Location currentLocation;
+
+    public OrderController(Employee employee, Location currentLocation) {
+        this.employee = employee;
+        this.currentLocation = currentLocation;
+        CURRENT_LOCATION = currentLocation.getLanguage().equals("Swedish") ? LOCATION_SWEDEN : LOCATION_USA;
+    }
+
     /**
      * Called when the window is showing
      */
     @FXML
     private void initialize() {
-        frame = new JFrame();
-        System.out.println(test);
         initGUIData();
         initGUIPresentation();
         initListeners();
     }
 
-    public void setEmployee(String test) {
-        this.test = test;
-    }
     /**
      * Get products and sets the data to gui
      */
@@ -120,7 +120,7 @@ public class OrderController {
                             protected void updateItem(Product item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
-                                    switch (location) {
+                                    switch (CURRENT_LOCATION) {
                                         case LOCATION_SWEDEN:
                                             setText(item.getName().getSwedish());
                                             break;
@@ -169,14 +169,6 @@ public class OrderController {
 
     }
 
-    public void handleOnClickAddCustomer() {
-        EventQueue.invokeLater(()->{
-            frame.add(new AddCustomer(500,400));
-            frame.pack();
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        });
-    }
 
     public void handleOnClickAdmin() {
 
@@ -209,7 +201,7 @@ public class OrderController {
         if (selectedProduct != null) {
 
             listViewItems.add(
-                    location == LOCATION_SWEDEN ?
+                    CURRENT_LOCATION == LOCATION_SWEDEN ?
                             selectedProduct.getName().getSwedish() :
                             selectedProduct.getName().getEnglish()
             );
@@ -237,9 +229,7 @@ public class OrderController {
     }
 
     public void handleOnClickCancel() {
-        List<Order> orders = OrderDAO.getOrders();
 
-        for (Order order : orders) System.out.println(order);
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
@@ -277,7 +267,7 @@ public class OrderController {
     private void updatePrice(PriceOperation operation, ProductPrice price) {
         switch (operation) {
             case ADD:
-                switch (location) {
+                switch (CURRENT_LOCATION) {
                     case LOCATION_SWEDEN:
                         totalPrice += calculatePrice(price.getSEK());
                         totalPriceLabel.setText("Total price: SEK " + totalPrice);
@@ -289,7 +279,7 @@ public class OrderController {
                 }
                 break;
             case SUBTRACT:
-                switch (location) {
+                switch (CURRENT_LOCATION) {
                     case LOCATION_SWEDEN:
                         totalPrice -= calculatePrice(price.getSEK());
                         totalPriceLabel.setText("Total price: SEK " + totalPrice);

@@ -2,6 +2,9 @@ package database.model;
 
 import org.bson.types.ObjectId;
 
+/**
+ * @author Ola Dahl
+ */
 public class Location {
     private ObjectId id;
     private String name;

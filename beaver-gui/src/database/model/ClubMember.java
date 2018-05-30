@@ -5,6 +5,9 @@ import org.bson.types.ObjectId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Ola Dahl
+ */
 public class ClubMember {
     private ObjectId id;
     private String name;
