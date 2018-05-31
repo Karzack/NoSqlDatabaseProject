@@ -3,6 +3,9 @@ package database.model.product;
 import database.model.Unit;
 import org.bson.types.ObjectId;
 
+/**
+ * @author Ola Dahl
+ */
 public class Ingredient {
     private ObjectId id;
     private String name;

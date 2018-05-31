@@ -6,6 +6,9 @@ import org.bson.types.ObjectId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Ola Dahl
+ */
 public class Order {
     private ObjectId id;
     private ObjectId employeeId;

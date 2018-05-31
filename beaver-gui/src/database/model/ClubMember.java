@@ -5,6 +5,9 @@ import org.bson.types.ObjectId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Ola Dahl
+ */
 public class ClubMember {
     private ObjectId id;
     private String name;
@@ -77,7 +80,7 @@ public class ClubMember {
         this.occupation = occupation;
     }
 
-    public boolean hasBenefits() {
+    public boolean getHasBenefits() {
         return hasBenefits;
     }
 
@@ -109,7 +112,7 @@ public class ClubMember {
                 ", address=" + address +
                 ", memberSince=" + memberSince +
                 ", occupation='" + occupation + '\'' +
-                ", hasBenefits=" + hasBenefits +
+                ", getHasBenefits=" + hasBenefits +
                 ", listOfOrders=" + listOfOrders +
                 ", cardNumber='" + cardNumber + '\'' +
                 '}';

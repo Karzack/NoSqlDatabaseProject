@@ -1,5 +1,8 @@
 package database.model.product;
 
+/**
+ * @author Ola Dahl
+ */
 public class ProductPrice {
     private double SEK;
     private double USD;

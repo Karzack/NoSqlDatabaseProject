@@ -12,7 +12,7 @@
 
 <?import javafx.scene.control.TextField?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="orderwindow.OrderController">
+          xmlns:fx="http://javafx.com/fxml/1" >
     <padding>
         <Insets bottom="40" left="40" right="40" top="10"/>
     </padding>
@@ -28,7 +28,7 @@
         <padding>
             <Insets bottom="40"/>
         </padding>
-        <Button fx:id="addCustomerButton" onAction="#handleOnClickAddCustomer" text="Add Customer"/>
+
         <Button fx:id="AdminButton" onAction="#handleOnClickAdmin" text="Admin"/>
 
         <HBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">

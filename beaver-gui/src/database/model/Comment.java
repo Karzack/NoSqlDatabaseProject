@@ -2,6 +2,9 @@ package database.model;
 
 import java.util.Date;
 
+/**
+ * @author Ola Dahl
+ */
 public class Comment {
     private Employee issuer;
     private Employee issuee;

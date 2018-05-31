@@ -10,6 +10,9 @@ import database.model.Order;
 
 import java.util.ArrayList;
 
+/**
+ * @author Ola Dahl
+ */
 public class OrderDAO {
     private static String ORDERS_COLLECTION = "orders";
 

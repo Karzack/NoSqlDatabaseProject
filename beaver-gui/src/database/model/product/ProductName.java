@@ -1,5 +1,8 @@
 package database.model.product;
 
+/**
+ * @author Ola Dahl
+ */
 public class ProductName {
     private String swedish;
     private String english;

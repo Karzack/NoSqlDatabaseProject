@@ -1,10 +1,13 @@
 package GUI;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AddEmployee extends JPanel{
-    private Controller controller;
     private int width, height;
 
     private JTextField tfName = new JTextField();
@@ -16,10 +19,10 @@ public class AddEmployee extends JPanel{
 
     private JButton btnEnter = new JButton("Add Employee");
 
-    public AddEmployee(int width, int height, Controller controller){
+    public AddEmployee(int width, int height){
         this.width = width;
         this.height = height;
-        this.controller = controller;
+
         JLabel lblName = new JLabel("Employee name: ");
         JLabel lblSSN = new JLabel("Employee SSN: ");
         JLabel lblStartDate = new JLabel("Start date: ");
@@ -56,9 +59,14 @@ public class AddEmployee extends JPanel{
 
         add(btnEnter);
 
-        btnEnter.addActionListener(e -> {
-            controller.onAddEmployee(tfName.getText(), tfSSN.getText(), tfStartDate.getText(), tfEndDate.getText(), workingP.getText(), tfRole.getText());
-        });
+    }
+
+    public JButton getBtnEnter(){
+        return btnEnter;
+    }
+
+    public String[] getTextEmployeeData(){
+        return new String[]{tfName.getText(), tfSSN.getText(), tfStartDate.getText(), tfEndDate.getText(), workingP.getText(),tfRole.getText()};
     }
 
     public Dimension getPreferredSize(){

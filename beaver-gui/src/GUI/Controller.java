@@ -51,7 +51,7 @@ public class Controller {
 
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-            frame.getContentPane().add(new MainPanel(400,500, controller));
+//            frame.getContentPane().add(new MainPanel(400,500, controller));
             frame.pack();
             frame.setVisible(true);
 
