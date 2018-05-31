@@ -5,6 +5,8 @@ import database.dao.EmployeeDAO;
 import database.dao.LocationDAO;
 import database.model.Employee;
 import database.model.Location;
+import helpers.AddLocationsHelper;
+import helpers.AddProductsHelper;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,6 +41,8 @@ public class MainPanel extends JPanel {
     public MainPanel(int height, int width) {
         this.height = height;
         this.width = width;
+        AddProductsHelper.addProducts();
+        AddLocationsHelper.addLocations();
         initGUI();
     }
 

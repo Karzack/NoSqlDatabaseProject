@@ -1,5 +1,8 @@
 package GUI;
 
+import database.dao.EmployeeDAO;
+import database.model.Employee;
+
 import java.awt.Dimension;
 
 import javax.swing.JButton;
@@ -59,6 +62,18 @@ public class AddEmployee extends JPanel{
 
         add(btnEnter);
 
+        btnEnter.addActionListener((event)-> {
+            Employee employee = new Employee(
+                    tfName.getText(),
+                    tfSSN.getText(),
+                    tfStartDate.getText(),
+                    tfEndDate.getText(),
+                    Integer.parseInt(workingP.getText()),
+                    tfRole.getText()
+            );
+
+            EmployeeDAO.addEmployee(employee);
+        });
     }
 
     public JButton getBtnEnter(){
