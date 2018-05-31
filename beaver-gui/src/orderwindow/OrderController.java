@@ -68,7 +68,7 @@ public class OrderController {
     private ObservableList<IngredientItem> alternativeItems;
 
     private Product selectedProduct;
-    private ClubMember member;
+    private ClubMember clubMember;
     private IngredientItem selectedAlternative;
     private IngredientItem vanillaAddon;
     private IngredientItem caramelAddon;
@@ -179,16 +179,16 @@ public class OrderController {
     }
 
     /**
-     * Fetches a member with the supplied SSN
+     * Fetches a clubMember with the supplied SSN
      */
     public void handleMemberTextField(ActionEvent actionEvent) {
         TextField membersField = (TextField) actionEvent.getSource();
         ClubMember member = ClubMemberDAO.getMember(membersField.getCharacters().toString());
         if (member != null) {
-            this.member = member;
-            createAlertDialog("Success", "Found member " + member.getName());
+            this.clubMember = member;
+            createAlertDialog("Success", "Found clubMember " + member.getName());
         } else {
-            this.member = null;
+            this.clubMember = null;
             createAlertDialog("Error", "Member was not found");
         }
     }
@@ -229,14 +229,20 @@ public class OrderController {
     }
 
     public void handleOnClickCancel() {
-
+        List<ClubMember> members = ClubMemberDAO.getAllMembers();
+        for (ClubMember member : members) {
+            System.out.println(member);
+        }
+//        if (clubMember != null) {
+//            System.out.println(clubMember);
+//        }
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
         Order order = new Order(
-                null,
-                member != null ? member.getId() : null,
-                null,
+                employee.getId(),
+                clubMember != null ? clubMember.getId() : null,
+                currentLocation.getId(),
                 new Date(),
                 totalPrice,
                 orderItems
@@ -259,7 +265,7 @@ public class OrderController {
     }
 
     /**
-     * Updates the price depending on localization and member benefits.
+     * Updates the price depending on localization and clubMember benefits.
      *
      * @param operation Addition or subtraction.
      * @param price     The base price for the product.
@@ -294,11 +300,11 @@ public class OrderController {
     }
 
     /**
-     * Calculates the price based on member benefits (and later order history).
+     * Calculates the price based on clubMember benefits (and later order history).
      */
     private double calculatePrice(double price) {
-        if (member != null)
-            if (member.getHasBenefits())
+        if (clubMember != null)
+            if (clubMember.getHasBenefits())
                 return price - 0.10 * price;
         return price;
     }
