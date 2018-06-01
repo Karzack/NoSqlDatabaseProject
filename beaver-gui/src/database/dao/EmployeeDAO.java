@@ -6,6 +6,9 @@ import com.mongodb.client.model.Filters;
 import database.DBInstance;
 import database.model.Employee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Ola Dahl
  */
@@ -25,5 +28,14 @@ public class EmployeeDAO {
     public static void printAllEmployees() {
         MongoCollection<Employee> collection = DBInstance.connectDB().getCollection(EMPLOYEE_COLLECTION, Employee.class);
         for (Employee employee : collection.find()) System.out.println(employee);
+    }
+
+    public static List<Employee> getEmployees() {
+        MongoCollection<Employee> collection = DBInstance.connectDB().getCollection(EMPLOYEE_COLLECTION, Employee.class);
+        List<Employee> employees = new ArrayList<Employee>();
+        for (Employee employee: collection.find()) {
+            employees.add(employee);
+        }
+        return employees;
     }
 }
