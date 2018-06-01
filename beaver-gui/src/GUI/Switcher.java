@@ -57,7 +57,7 @@ public class Switcher extends JPanel {
             @Override
             public void run() {
 
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Switcher switcher = new Switcher();
 
                 frame.getContentPane().add(new MainPanel(400, 500));

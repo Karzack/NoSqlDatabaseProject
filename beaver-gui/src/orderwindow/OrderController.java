@@ -1,5 +1,6 @@
 package orderwindow;
 
+import com.sun.javafx.application.PlatformImpl;
 import database.dao.ClubMemberDAO;
 import database.dao.OrderDAO;
 import database.dao.ProductDAO;
@@ -11,14 +12,21 @@ import database.model.product.Product;
 import database.model.product.ProductPrice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
+import managementwindow.ManagementController;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -173,7 +181,25 @@ public class OrderController {
 
 
     public void handleOnClickAdmin() {
+        JFXPanel jfxPanel = new JFXPanel();
 
+        PlatformImpl.startup(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/managementwindow/management_gui.fxml"));
+                loader.setController(new ManagementController(employee,currentLocation));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 500, 575);
+
+                jfxPanel.setScene(scene);
+                JFrame frame3 = new JFrame();
+                frame3.getContentPane().add(jfxPanel);
+                frame3.pack();
+                frame3.setVisible(true);
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     public void handleOnClickLogout() {
