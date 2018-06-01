@@ -68,8 +68,6 @@
     </HBox>
 
     <HBox alignment="BOTTOM_RIGHT" spacing="2" GridPane.columnIndex="1" GridPane.rowIndex="10">
-        <Button fx:id="cancelButton" onAction="#handleOnClickCancel" text="Cancel" GridPane.columnIndex="1"
-                GridPane.rowIndex="10"/>
         <Button fx:id="confirmButton" onAction="#handleOnClickConfirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
     </HBox>
 

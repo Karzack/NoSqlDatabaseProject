@@ -177,12 +177,14 @@ public class OrderController {
     }
 
     public void handleOnClickLogout() {
-        for (List<Stock> list : stockItems) {
-            for (Stock stock : list) {
-                System.out.println(stock);
-            }
-            System.out.println();
-        }
+//        for (List<Stock> list : stockItems) {
+//            for (Stock stock : list) {
+//                System.out.println(stock);
+//            }
+//            System.out.println();
+//        }
+
+        System.out.println(clubMember);
     }
 
     /**
@@ -235,12 +237,6 @@ public class OrderController {
             orderItems.remove(selectedIndex);
             stockItems.remove(selectedIndex);
         }
-    }
-
-    public void handleOnClickCancel() {
-        listViewItems.clear();
-        orderItems.clear();
-        stockItems.clear();
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
@@ -321,7 +317,7 @@ public class OrderController {
     }
 
     /**
-     * Calculates the price based on clubMember benefits (and later order history).
+     * Calculates the price based on clubMember benefits.
      */
     private double calculatePrice(double price) {
         if (clubMember != null) {
