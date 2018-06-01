@@ -1,5 +1,7 @@
 package GUI;
 
+import helpers.AddStockInformationHelper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +35,7 @@ public class Switcher extends JPanel {
         panelMap.put("EmployeePanel", employeePanel);
         this.add(employeePanel, "EmployeeMenu");
 
-
+//        AddStockInformationHelper.addInitialStockInformation();
     }
 
     public void showCard(String name) {

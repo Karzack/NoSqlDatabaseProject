@@ -31,6 +31,9 @@ public class IngredientItem {
 
     @Override
     public String toString() {
-        return ingredient.getName();
+        return "IngredientItem{" +
+                "ingredient=" + ingredient +
+                ", quantity=" + quantity +
+                '}';
     }
 }

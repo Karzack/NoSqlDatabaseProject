@@ -3,6 +3,7 @@ package orderwindow;
 import database.dao.ClubMemberDAO;
 import database.dao.OrderDAO;
 import database.dao.ProductDAO;
+import database.dao.StockDAO;
 import database.model.*;
 import database.model.product.Ingredient;
 import database.model.product.IngredientItem;
@@ -62,7 +63,7 @@ public class OrderController {
     }
 
     private List<Product> orderItems = new ArrayList<>();
-    private List<List<IngredientItem>> stockItems = new ArrayList<>();
+    private List<List<Stock>> stockItems = new ArrayList<>();
 
     private ObservableList<String> listViewItems;
     private ObservableList<IngredientItem> alternativeItems;
@@ -106,8 +107,6 @@ public class OrderController {
 
         listViewItems = FXCollections.observableArrayList();
         orderListView.setItems(listViewItems);
-
-
     }
 
     /**
@@ -178,7 +177,12 @@ public class OrderController {
     }
 
     public void handleOnClickLogout() {
-
+        for (List<Stock> list : stockItems) {
+            for (Stock stock : list) {
+                System.out.println(stock);
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -210,9 +214,8 @@ public class OrderController {
                             selectedProduct.getName().getEnglish()
             );
 
-            stockItems.add(getSelectedIngredients());
             orderItems.add(selectedProduct);
-
+            updateStockItems();
             updateMemberEligibleOrders(PriceOperation.ADD, selectedProduct);
             updatePrice(PriceOperation.ADD, selectedProduct.getPrice());
         }
@@ -235,7 +238,9 @@ public class OrderController {
     }
 
     public void handleOnClickCancel() {
-
+        listViewItems.clear();
+        orderItems.clear();
+        stockItems.clear();
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
@@ -253,19 +258,31 @@ public class OrderController {
         }
 
         OrderDAO.insertOrder(order);
+        StockDAO.updateStockQuantity(stockItems);
+
+        listViewItems.clear();
+        orderItems.clear();
+        stockItems.clear();
     }
 
-    /**
-     * Returns the selected ingredients
-     */
-    private List<IngredientItem> getSelectedIngredients() {
-        List<IngredientItem> items = new ArrayList<>(selectedProduct.getMandatoryIngredients());
-        if (selectedAlternative != null) items.add(selectedAlternative);
-        if (vanillaAddon != null) items.add(vanillaAddon);
-        if (caramelAddon != null) items.add(caramelAddon);
-        if (irishCreamAddon != null) items.add(irishCreamAddon);
 
-        return items;
+    private void updateStockItems() {
+        List<Stock> items = new ArrayList<>();
+        selectedProduct.getMandatoryIngredients().forEach(item -> items.add(getStockFromIngredientItem(item)));
+        if (selectedAlternative != null) items.add(getStockFromIngredientItem(selectedAlternative));
+        if (vanillaAddon != null) items.add(getStockFromIngredientItem(vanillaAddon));
+        if (caramelAddon != null) items.add(getStockFromIngredientItem(caramelAddon));
+        if (irishCreamAddon != null) items.add(getStockFromIngredientItem(irishCreamAddon));
+
+        stockItems.add(items);
+    }
+
+    private Stock getStockFromIngredientItem(IngredientItem item) {
+        return new Stock(
+                currentLocation.getId(),
+                item.getIngredient(),
+                item.getQuantity()
+        );
     }
 
     /**
@@ -308,7 +325,7 @@ public class OrderController {
      */
     private double calculatePrice(double price) {
         if (clubMember != null) {
-            if (memberEligibleOrders %10 == 0) {
+            if (memberEligibleOrders % 10 == 0) {
                 return 0;
             }
             if (clubMember.getHasBenefits())
@@ -321,8 +338,12 @@ public class OrderController {
         if (clubMember != null) {
             if (!(product.getName().getEnglish().equals("Whole Bean Coffee"))) {
                 switch (operation) {
-                    case ADD: memberEligibleOrders++; break;
-                    case SUBTRACT: memberEligibleOrders--; break;
+                    case ADD:
+                        memberEligibleOrders++;
+                        break;
+                    case SUBTRACT:
+                        memberEligibleOrders--;
+                        break;
                 }
             }
         }
