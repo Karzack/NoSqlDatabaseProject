@@ -1,6 +1,9 @@
 package GUI;
 
-import helpers.AddStockInformationHelper;
+import com.mongodb.client.MongoDatabase;
+import database.DBInstance;
+import helpers.*;
+import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +21,7 @@ public class Switcher extends JPanel {
     }
 
     private void init() {
-
+        initData();
         AddCustomer addCustomer = new AddCustomer(300, 400);
         panelMap.put("AddCustomer", addCustomer);
         this.add(addCustomer, "AddCustomer");
@@ -51,7 +54,25 @@ public class Switcher extends JPanel {
         frame.dispose();
     }
 
+    private void initData() {
+        MongoDatabase db = DBInstance.connectDB();
+        int i = 0;
+        for (Document document : db.listCollections()) {
+            i++;
+        }
+        if (i == 0) {
+            System.out.println("Adding initial data");
+            AddStockInformationHelper.addInitialStockInformation();
+            AddProductsHelper.addProducts();
+            AddLocationsHelper.addLocations();
+            AddMembersHelper.addSampleMembers();
+            AddEmployeesHelper.addSampleEmployees();
+        }
+
+    }
+
     public static void main(String[] args) {
+
         frame = new JFrame();
         EventQueue.invokeLater(new Runnable() {
             @Override
