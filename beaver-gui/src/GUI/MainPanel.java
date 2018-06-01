@@ -1,6 +1,7 @@
 package GUI;
 
 import com.sun.javafx.application.PlatformImpl;
+import database.DBInstance;
 import database.dao.EmployeeDAO;
 import database.dao.LocationDAO;
 import database.model.Employee;
@@ -17,6 +18,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 
@@ -41,8 +44,7 @@ public class MainPanel extends JPanel {
     public MainPanel(int height, int width) {
         this.height = height;
         this.width = width;
-//        AddProductsHelper.addProducts();
-//        AddLocationsHelper.addLocations();
+
         initGUI();
     }
 
@@ -67,6 +69,7 @@ public class MainPanel extends JPanel {
         addCustomer.setBounds(210, 180, 140, 30);
 
 
+
         addCustomer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +90,9 @@ public class MainPanel extends JPanel {
             }
         });
         login.addActionListener(new ActionListener() {
+
+
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 Employee employee = EmployeeDAO.getEmployee(txtSSN.getText());
@@ -102,11 +108,20 @@ public class MainPanel extends JPanel {
                             loader.setController(controller);
                             Parent root = loader.load();
                             Scene scene = new Scene(root, 500, 575);
-
+                            JFrame frame = new JFrame();
                             jfxPanel.setScene(scene);
-                            frame3.getContentPane().add(jfxPanel);
-                            frame3.pack();
-                            frame3.setVisible(true);
+                            frame.getContentPane().add(jfxPanel);
+                            frame.pack();
+                            frame.setVisible(true);
+
+                            frame.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosing(WindowEvent e) {
+                                    super.windowClosing(e);
+                                    System.out.println("Disconnecting from database");
+                                    DBInstance.disconnectDB();
+                                }
+                            });
 
                         } catch (IOException e1) {
                             e1.printStackTrace();
@@ -117,6 +132,8 @@ public class MainPanel extends JPanel {
         });
 
         locationsCombo.addItemListener(e -> locationName = (String)e.getItem());
+
+
     }
 
 

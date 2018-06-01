@@ -83,14 +83,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", SSN='" + SSN + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", workingPercentage=" + workingPercentage +
-                ", role='" + role + '\'' +
-                '}';
+        return this.name;
     }
 }

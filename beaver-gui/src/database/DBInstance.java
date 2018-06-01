@@ -21,7 +21,7 @@ public class DBInstance {
     }
 
     public static MongoDatabase connectDB() {
-        if (db == null) {
+        if (instance == null) {
             CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
                     fromProviders(PojoCodecProvider.builder().automatic(true).build()));
             instance = new MongoClient("localhost",
@@ -33,7 +33,10 @@ public class DBInstance {
     }
 
     public static void disconnectDB() {
-        if (instance != null)
+        if (instance != null) {
             instance.close();
+            instance = null;
+            db = null;
+        }
     }
 }

@@ -106,15 +106,6 @@ public class ClubMember {
 
     @Override
     public String toString() {
-        return "ClubMember{" +
-                "id=" + id +
-                ", SSN='" + SSN + '\'' +
-                ", address=" + address +
-                ", memberSince=" + memberSince +
-                ", occupation='" + occupation + '\'' +
-                ", getHasBenefits=" + hasBenefits +
-                ", listOfOrders=" + listOfOrders +
-                ", cardNumber='" + cardNumber + '\'' +
-                '}';
+        return this.name;
     }
 }

@@ -202,6 +202,9 @@ public class OrderController {
         });
     }
 
+    public void onLogout() {
+
+    }
     public void handleOnClickLogout() {
 //        for (List<Stock> list : stockItems) {
 //            for (Stock stock : list) {
@@ -209,7 +212,7 @@ public class OrderController {
 //            }
 //            System.out.println();
 //        }
-
+        System.out.println(memberEligibleOrders);
         System.out.println(clubMember);
     }
 

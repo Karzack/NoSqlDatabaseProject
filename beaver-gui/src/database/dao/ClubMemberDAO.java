@@ -63,4 +63,9 @@ public class ClubMemberDAO {
         }
         return members;
     }
+
+    public static List<ClubMember> getAllMembers() {
+        MongoCollection<ClubMember> collection = DBInstance.connectDB().getCollection(MEMBERS_COLLECTION, ClubMember.class);
+        return getMemberList(collection.find());
+    }
 }
