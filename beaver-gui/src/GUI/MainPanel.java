@@ -41,8 +41,8 @@ public class MainPanel extends JPanel {
     public MainPanel(int height, int width) {
         this.height = height;
         this.width = width;
-        AddProductsHelper.addProducts();
-        AddLocationsHelper.addLocations();
+//        AddProductsHelper.addProducts();
+//        AddLocationsHelper.addLocations();
         initGUI();
     }
 

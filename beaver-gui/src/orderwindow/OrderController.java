@@ -75,6 +75,7 @@ public class OrderController {
     private IngredientItem irishCreamAddon;
 
     private double totalPrice = 0;
+    private int memberEligibleOrders;
     private final Employee employee;
     private final Location currentLocation;
 
@@ -105,6 +106,8 @@ public class OrderController {
 
         listViewItems = FXCollections.observableArrayList();
         orderListView.setItems(listViewItems);
+
+
     }
 
     /**
@@ -187,6 +190,7 @@ public class OrderController {
         if (member != null) {
             this.clubMember = member;
             createAlertDialog("Success", "Found clubMember " + member.getName());
+            memberEligibleOrders = ClubMemberDAO.getNumberOfEligibleOrders(member.getSSN());
         } else {
             this.clubMember = null;
             createAlertDialog("Error", "Member was not found");
@@ -209,6 +213,7 @@ public class OrderController {
             stockItems.add(getSelectedIngredients());
             orderItems.add(selectedProduct);
 
+            updateMemberEligibleOrders(PriceOperation.ADD, selectedProduct);
             updatePrice(PriceOperation.ADD, selectedProduct.getPrice());
         }
     }
@@ -222,6 +227,7 @@ public class OrderController {
         if (selectedIndex >= 0) {
             updatePrice(PriceOperation.SUBTRACT, orderItems.get(selectedIndex).getPrice());
 
+            updateMemberEligibleOrders(PriceOperation.SUBTRACT, orderItems.get(selectedIndex));
             listViewItems.remove(selectedIndex);
             orderItems.remove(selectedIndex);
             stockItems.remove(selectedIndex);
@@ -229,13 +235,7 @@ public class OrderController {
     }
 
     public void handleOnClickCancel() {
-        List<ClubMember> members = ClubMemberDAO.getAllMembers();
-        for (ClubMember member : members) {
-            System.out.println(member);
-        }
-//        if (clubMember != null) {
-//            System.out.println(clubMember);
-//        }
+
     }
 
     public void handleOnClickConfirm(ActionEvent actionEvent) {
@@ -247,6 +247,10 @@ public class OrderController {
                 totalPrice,
                 orderItems
         );
+
+        if (clubMember != null) {
+            ClubMemberDAO.updateMemberOrders(clubMember.getSSN(), order);
+        }
 
         OrderDAO.insertOrder(order);
     }
@@ -303,10 +307,25 @@ public class OrderController {
      * Calculates the price based on clubMember benefits (and later order history).
      */
     private double calculatePrice(double price) {
-        if (clubMember != null)
+        if (clubMember != null) {
+            if (memberEligibleOrders %10 == 0) {
+                return 0;
+            }
             if (clubMember.getHasBenefits())
                 return price - 0.10 * price;
+        }
         return price;
+    }
+
+    private void updateMemberEligibleOrders(PriceOperation operation, Product product) {
+        if (clubMember != null) {
+            if (!(product.getName().getEnglish().equals("Whole Bean Coffee"))) {
+                switch (operation) {
+                    case ADD: memberEligibleOrders++; break;
+                    case SUBTRACT: memberEligibleOrders--; break;
+                }
+            }
+        }
     }
 
     private void createAlertDialog(String title, String content) {
